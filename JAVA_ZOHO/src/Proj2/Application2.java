@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Application2 {
 	public static void main(String[] args) {
+		PrintStream ss = System.out;
 		Scanner scan = new Scanner(System.in);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("\nMedia Player - Queue Implementation");
@@ -16,10 +17,11 @@ public class Application2 {
 		Map<String, Integer> hp = new HashMap<>();
 		int choice = -1, currsize = 0;
 		while (choice != 0) {
-			System.out.println("\n1. Add a new Song\n2. Go to next Song\n3. What's the next song?\n4. Total number of Songs\n5. Exit Music Player\nEnter your choice: ");
+			System.out.println("\n1. Add a new Song\n2. Go to next Song\n3. What's the next song?\n4. Total length of Playlist\n5. Exit Music Player\nEnter your choice: ");
 			try {
 				choice = scan.nextInt();
-			} catch(Exception e) {
+				scan.nextLine();
+			} catch (Exception e) {
 				System.out.println("Invalid Input :(");
 				break;
 			}
@@ -27,18 +29,26 @@ public class Application2 {
 			case 1: {
 				currsize += 1;
 				// int songRank = currsize;
-				String songName = scan.next();
-				String singerName = scan.next();
+				ss.println("Enter Song Name: ");
+				String songName = scan.nextLine();
+				ss.println("Enter Singer Name: ");
+				String singerName = scan.nextLine();
+				ss.println("Enter Song Duration (format: mins secs: ");
+				int songMin = scan.nextInt(), songSec = scan.nextInt();
 				boolean flag = true;
 				if (hp.containsKey(songName)) {
-					int y = hp.get(songName);
-					hp.put(songName, y + 1);
-				} else {
-					hp.put(songName, 0);
+					// int y = hp.get(songName);
+					hp.putIfAbsent(songName, 1);
 				}
-				scan.nextLine();
-				if (hp.get(songName) == 0)
-					playlist.offer(new Song(songName, singerName));
+				// } else {
+				// 	hp.putIfAbsent(songName, 0);
+				// }
+				// scan.nextLine();
+				Song elemsong = new Song(songName, singerName, songMin, songSec);
+				if (hp.get(songName) == null) {
+					playlist.offer(elemsong);
+				}
+				hp.put(songName, elemsong.getDuration());
 				System.out.println(playlist);
 				break;
 
@@ -48,19 +58,34 @@ public class Application2 {
 					System.out.println("Playlist is empty!");
 					break;
 				}
-				System.out.println("Removed: " + playlist.poll());
+				Song dummy = playlist.poll();
+				System.out.println("Removed: " + dummy);
+				// int y = hp.get(songName);
+				// if (y <= 1) {
+				// 	y = 0;
+				// } else {
+				// 	y -= 1;
+				// }
+				// hp.put(dummy.audName, y);
+				hp.put(dummy.audName, null);
 				break;
 			}
 			case 3: {
 				if (playlist.size() == 0) {
-					System.out.println("That was the last song!");
+					System.out.println("No songs in playlist currently!");
 					break;
 				}
 				System.out.println(playlist.peek());
 				break;
 			}
 			case 4: {
-				System.out.println(playlist.size());
+				System.out.println("Total Duration of the playlist: ");
+				int totdur = 0;
+				for (Map.Entry<String, Integer> ele : hp.entrySet()) {
+					Integer curdur = ele.getValue();
+					totdur += curdur != null ? curdur : 0;
+				}
+				System.out.println(totdur);
 				break;
 			}
 			case 5: {
