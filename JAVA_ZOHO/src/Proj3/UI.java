@@ -12,14 +12,14 @@ public class UI {
     }
     
     public void startScreen () {
-        System.out.println("1. Display Store Products");
-        System.out.println("2. Display Cart");
+        System.out.println("1. Display All Vegetables");
+        System.out.println("2. Display my Cart");
         System.out.println("0. Exit");
     }
     
     public void storeProductsMenu() {
-        System.out.println("1. Add to Cart");
-        System.out.println("2. Remove From Cart");
+        System.out.println("1. Add item to my Cart");
+        System.out.println("2. Remove from my Cart");
         System.out.println("0. Exit");
     }
     
