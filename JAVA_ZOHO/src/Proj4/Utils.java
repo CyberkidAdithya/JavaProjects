@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
-// A Java program that uses the MD5 to do the hashing
+	// A Java program that uses the MD5 to do the hashing
 	public static String hashMe(String input) {
 		try {
 			MessageDigest msgDst = MessageDigest.getInstance("MD5");
