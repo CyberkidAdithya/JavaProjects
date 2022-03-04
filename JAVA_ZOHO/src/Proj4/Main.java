@@ -8,6 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Main {
+	
+    public static void showsorteduserlist()
+    {
+	TreeMap<String, User> sorted = new TreeMap<>();
+	sorted.putAll(userlist);
+	for (Map.Entry<String, User> queryuser : sorted.entrySet())
+	    System.out.println("Username = " + queryuser.getKey() +
+		    "\n\tData = " + queryuser.getValue());
+    }
+	
 	public static void main(String[] args) throws Exception {
 		// File file_object = new File("E:\\Coding\\Dev\\Inputf.txt");
 		// Scanner fscan = new Scanner(file_object);
@@ -130,7 +140,8 @@ public class Main {
 				break;
 			}
 			case 6: {
-				ss.println(userlist);
+// 				ss.println(userlist);
+				showsorteduserlist();
 				break;
 			}
 			default: {
