@@ -1,0 +1,3 @@
+{User{fname='fname', lname='lname', uname='uname', pwd='9003d1df22eb4d3820015070385194c8', city='city', email='email', doj='15/07/2002'}=uname}
+{User{fname='fname', lname='lname', uname='uname', pwd='9003d1df22eb4d3820015070385194c8', city='city', email='email', doj='15/07/2002'}=uname, User{fname='fname', lname='lname', uname='uname', pwd='9003d1df22eb4d3820015070385194c8', city='city', email='email2', doj='15/07/2002'}=uname}
+Invalid Input :(
