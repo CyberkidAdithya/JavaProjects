@@ -154,3 +154,8 @@ for (char letter : letters) {
     System.out.print(letter + " ");
 }
 // H e l l o W o r l d
+
+// generate unique ID for objects
+int id = 1;
+AtomicInteger nextId = new AtomicInteger();
+this.id = nextId.incrementAndGet();     // inside constructor

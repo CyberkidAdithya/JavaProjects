@@ -9,13 +9,15 @@ import java.util.*;
 public class Application0 {
     public static void main(String[] args) throws FileNotFoundException {
 
+        // I/O objects
         PrintStream ss = System.out;    // LAZINESS OVERLOADED :P
         Scanner scan2 = new Scanner(System.in);
         Scanner scan;
 
+        // file reading
         String file_path = System.getProperty("user.dir");
         String abs_class_name = Application0.class.getName();
-        String class_name = abs_class_name.substring(1 + abs_class_name.indexOf("."));
+        String class_name = abs_class_name.substring(abs_class_name.indexOf(".") + 1);
         String package_name = abs_class_name.substring(0, abs_class_name.indexOf("."));
         ss.println(class_name);     // DEBUG
         ss.println(package_name);   // DEBUG
@@ -28,8 +30,10 @@ public class Application0 {
         } else {
             scan = new Scanner(file_object);    // input file and cmd
             BufferedReader br = new BufferedReader(new FileReader(file_object));    // input file and cmd
+            System.setOut(new PrintStream(new FileOutputStream(file_path + "\\src\\"  + package_name + "\\output.out")));
         }
 
+        // your code here
         try {
             ArrayList<Student> cseA = new ArrayList<>();
             int numberofstudents = 0;
@@ -45,36 +49,40 @@ public class Application0 {
                 cseA.add(newcomer);
                 numberofstudents++;
             }
-            ss.println(cseA);
-            ss.println("Enter roll no. to query:\t");
-
+//            ss.println(cseA);   // DEBUG
             int queryindex = -1;
-            try {
-                queryindex = scan2.nextInt();
-            } catch (Exception err) {
-                ss.println("Invalid Input given: " + err);
-            }
-            boolean found = false;
-            for (Student stud : cseA) {      // Search Records
-                if (queryindex > numberofstudents) {
-                    ss.println("Invalid Index Given");
+            do {
+                ss.println("Enter roll no. to query (give 0 to exit):\t");
+
+                try {
+                    queryindex = scan2.nextInt();
+                } catch (Exception err) {
+                    ss.println("Invalid Input given: " + err);
                     break;
                 }
-                if (stud.getId() == queryindex) {
-                    // class.function(object.variable)
-                    ss.println("Result of " + stud.getName() + ": " + (Student.getaverage(stud.getMarks()) > 40 ? "pass" : "fail"));
-                    found = true;
-                    break;
+                boolean found = false;
+                for (Student stud : cseA) {      // Search Records
+                    if (queryindex > numberofstudents) {
+                        ss.println("Invalid Index Given");
+                        break;
+                    }
+                    if (stud.getId() == queryindex) {
+                        // class.function(object.function)
+                        ss.println("Result of " + stud.getName() + ": " + (Student.getaverage(stud.getMarks()) > 40 ? "pass" : "fail"));
+                        found = true;
+                        break;
+                    }
                 }
-            }
-            if (!found) {
-                ss.println("Student not found!");
-            }
+                if (!found && queryindex != 0) {
+                    ss.println("Student not found!");
+                }
+            } while (queryindex != 0);
         }
         catch (Exception err) {
             System.out.println("Program crashed successfully: " + err);
         }
 
+        // close opened file buffers/streams
         scan.close();
         scan2.close();
     }

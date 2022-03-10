@@ -2,6 +2,12 @@ package Proj0;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+enum StudentOutline {
+    name,
+    marks,
+    unique_id;
+}
+
 public class Student {
     private String name;
     private int[] marks = new int[3];
