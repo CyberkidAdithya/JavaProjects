@@ -3,7 +3,7 @@
 Java is a verbose programming language.
 Java is platform independent.
 All code in Java is defined in classes.
-Java constants can be initialized using public static final variable_name.  
+Java constants can be initialized using public static final variable_name.
 Compilation: Source Code to Byte Code (Creates a executable class file)
 {} can be used for creating scopes in the program
 
@@ -11,7 +11,7 @@ Compilation: Source Code to Byte Code (Creates a executable class file)
 
 // ##################################################
 
-// System.out.println("Hello World");	// using print() will not throw "\n"
+// System.out.println("Hello World");   // using print() will not throw "\n"
 // print("Hello World")
 
 // string1.toCharArray();
@@ -66,29 +66,29 @@ Compilation: Source Code to Byte Code (Creates a executable class file)
 
 // --------------------------------------------------
 // ARRAY LIST
-// -	add(index = n, element)
-// -	addAll(oldarr)
-// -	get(index)
-// -	set(index, newvalue)
-// -	remove(index)
-// -	remove(Integer.valueOf(30))
-// -	size()
-// -	clear()
+// -    add(index = n, element)
+// -    addAll(oldarr)
+// -    get(index)
+// -    set(index, newvalue)
+// -    remove(index)
+// -    remove(Integer.valueOf(30))
+// -    size()
+// -    isEmpty()
+// -    clear()
 // STACK
-// -	push(element)
-// -	pop()
-// -	peek()
+// -    push(element)
+// -    pop()
+// -    peek()
 
 // QUEUE
-// -	offer(element)
-// -	poll()
-// -	peek()
+// -    offer(element)
+// -    poll()
+// -    peek()
 
 // SET
-// - 	add(element)
-// - 	remove(element)
-// - 	contains(element)
-// - 	isEmpty()
+// -    add(element)
+// -    remove(element)
+// -    contains(element)
 // --------------------------------------------------
 
 // ##################################################
@@ -153,4 +153,4 @@ char[] letters = word.toCharArray();
 for (char letter : letters) {
     System.out.print(letter + " ");
 }
-// H e l l o W o r l d 
+// H e l l o W o r l d

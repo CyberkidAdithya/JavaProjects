@@ -14,7 +14,7 @@ public class Flight {
 
     public void bookTicket(Ticket ticket) {
         if (ticket.age > 5) {
-            if (cfTickets.size() < 100) {
+            if (cfTickets.size() <= 2) {
                 requestClass.allocateClass(ticket);
                 cfTickets.add(ticket);
             } else if (racTickets.size() < 50) {

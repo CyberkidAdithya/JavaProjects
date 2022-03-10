@@ -1,26 +1,40 @@
- package Proj0;
+package Proj0;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Student {
-	String name;
-	int age;
-	int[] marks = new int[3];
+    private String name;
+    private int[] marks = new int[3];
+    private int id = 1;
+    static AtomicInteger nextId = new AtomicInteger();
 
-	Student (String username, int userage, int usermarks[]) {
-		name = username;
-		age = userage;
-		marks = usermarks.clone();
-	}
+    Student(String username, int usermarks[]) {
+        this.id = nextId.incrementAndGet();
+        this.name = username;
+        this.marks = usermarks.clone();
+    }
 
-	static double getaverage(int[] marks) {
-		double tot = 0;
-		for (int i = 0; i < 3; i++) {
-			tot += marks[i];
-		}
-		return tot / 3;
-	}
+    static double getaverage(int[] marks) {
+        double tot = 0;
+        for (int i = 0; i < 3; i++) {
+            tot += marks[i];
+        }
+        return tot / 3;
+    }
 
-	@Override
-	public String toString() {
-		return name + " " + age + " " + "[" + marks[0] + "," + marks[1] + "," + marks[2] + "]";
-	}
+    @Override
+    public String toString() {
+        return name + ": " + "[" + marks[0] + "," + marks[1] + "," + marks[2] + "]";
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int[] getMarks() {
+        return marks;
+    }
+    public int getId() {
+        return id;
+    }
+
 }

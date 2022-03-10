@@ -3,7 +3,7 @@ package Proj3;
 import java.util.*;     // ArrayList, List
 
 public class Products {
-    private final List<Product> products = new ArrayList<Product>();
+    private static final List<Product> products = new ArrayList<Product>();
 
     public Products () {
         this.initStoreItems();
