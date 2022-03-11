@@ -15,13 +15,29 @@ import java.lang.Thread;
 //    }
 //}
 
+//thread creation using extends: Session t1=new Session(threadname);
+
 class Session implements Runnable {
+    private volatile int count = 0;
+
     public void run() {
-        System.out.println("Active Thread Count: " + Thread.activeCount() + Thread.currentThread().getName());
-        try {
-            Thread.sleep(100);  // static method of Thread Class
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (count++ < 10) {
+            System.out.println(Thread.currentThread().getName() + ": " + count);
+            try {
+                Thread.sleep(100);  // static method of Thread Class
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
+//thread creation using runnable: Thread t1 = new Thread(new Session(threadname));
+
+    private void stop() {
+        this.setCount(10);
+    }
+
+    public void setCount(int xx) {
+        this.count = xx;
+    }
+
 }

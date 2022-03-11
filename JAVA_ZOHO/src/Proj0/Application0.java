@@ -19,8 +19,8 @@ public class Application0 {
         String abs_class_name = Application0.class.getName();
         String class_name = abs_class_name.substring(abs_class_name.indexOf(".") + 1);
         String package_name = abs_class_name.substring(0, abs_class_name.indexOf("."));
-        ss.println(class_name);     // DEBUG
-        ss.println(package_name);   // DEBUG
+//        ss.println(class_name);     // DEBUG
+//        ss.println(package_name);   // DEBUG
         File file_object = new File(file_path + "\\src\\" + package_name + "\\input.in");
         boolean readfromfile = file_object.exists();
         if (!readfromfile) {

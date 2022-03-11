@@ -64,31 +64,65 @@ Compilation: Source Code to Byte Code (Creates a executable class file)
 // StringBuilder sb = new StringBuilder();
 // string word = sb.append("Valid\n");
 
+// Thread methods
+
+// run()
+// pause()
+// setName()
+// getName()
+// join()
+
+// Creation of Thread
+{
+    // using extends
+    myThreadClass threadname = new myThreadClass();
+    // using runnable
+    Thread threadname = new Thread(myThreadClass);
+}
+
+
+
+
 // --------------------------------------------------
 // ARRAY LIST
-// -    add(index = n, element)
-// -    addAll(oldarr)
-// -    get(index)
-// -    set(index, newvalue)
-// -    remove(index)
-// -    remove(Integer.valueOf(30))
-// -    size()
-// -    isEmpty()
-// -    clear()
+{
+    -    add(index, value)
+    -    addAll(ArrayList)
+    -    get(index)
+    -    set(index, value)
+    -    remove(index)
+    -    remove(Integer.valueOf(30))
+    -    size()
+    -    isEmpty()
+    -    clear()
+}
 // STACK
-// -    push(element)
-// -    pop()
-// -    peek()
+{
+    -    push(value)
+    -    pop()
+    -    peek()
+}
 
 // QUEUE
-// -    offer(element)
-// -    poll()
-// -    peek()
+{
+    -    offer(value)
+    -    poll()
+    -    peek()
+}
 
 // SET
-// -    add(element)
-// -    remove(element)
-// -    contains(element)
+{
+    -    add(value)
+    -    remove(value)
+    -    contains(value)
+}
+
+// HASHMAP
+{
+    -   get(index)
+    -   put(index, value)
+    -   containsKey(value)
+}
 // --------------------------------------------------
 
 // ##################################################
