@@ -88,4 +88,10 @@ public class MySubmission {
 /*
     Thread:
         start(), sleep(ms), getState(), getName(), getPriority(), getCount(), run(), setName(), isDaemon(), join(), setDaemon(),
+
+    run() contains the code that is excuted inside the new thread
+    start() is used for calling the newly created thread
+    getName() returns the name of the current thread
+
+
  */
