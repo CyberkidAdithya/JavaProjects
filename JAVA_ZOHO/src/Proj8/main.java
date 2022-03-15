@@ -97,7 +97,10 @@ public class main {
         // get the no. of available processors
         int coreCount = Runtime.getRuntime().availableProcessors();
 //        System.out.println("Cores: " + coreCount);  // 8
-        final ExecutorService service = Executors.newFixedThreadPool(coreCount);
+//        final ExecutorService service = Executors.newFixedThreadPool(coreCount);  // immortal threads
+//        final ExecutorService service = Executors.newScheduledThreadPool(coreCount);  // threads with delay
+//        service.scheduleWithFixedDelay(searchBot, 15, 10, TimeUnit.SECONDS);
+        final ExecutorService service = Executors.newCachedThreadPool();    // mortal threads
 
         for (int i = 0; i < numberOfFiles; i++) {
 //            Thread bot = new Thread(searchBot);
