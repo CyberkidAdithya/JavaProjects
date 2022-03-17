@@ -1,9 +1,9 @@
 package Proj6;
 
 public class seatClass {
-	private int EC = 21;
-	private int BC = 21;
-	private int FC = 21;
+	private int EC = 4;
+	private int BC = 3;
+	private int FC = 2;
 
 	public void allocateClass(Ticket ticket) {
 		if (EC != 0 && ((ticket.seatClass.equals("EC")))) {

@@ -50,7 +50,7 @@ public class Main {
 		int age = scan.nextInt();
 		ss.print("Gender : ");
 		String gender = scan.next();
-		ss.print("seat Class Type (EC - Economy[100], BC - Business[50], FC - First[25]): ");
+		ss.print("seat Class Type (EC - Economy[4], BC - Business[3], FC - First[2]): ");
 		String seatpref = scan.next();
 		return new Ticket(name, age, gender, seatpref);
 

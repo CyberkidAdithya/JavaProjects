@@ -1,6 +1,6 @@
 package Proj0;
 
-import Competitive.MySubmission;
+//import Competitive.MySubmission;
 
 import java.io.*;
 import java.lang.*;

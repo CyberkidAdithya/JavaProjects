@@ -57,7 +57,8 @@ public class main {
         try {
 //            System.out.println("#DEBUG PATH: " + path);
             String text = main.searchstring;    // create a deepcopy
-            List<String> texts = Files.readAllLines(path);
+            List<String> texts = Files.readAllLines(path);  // readAllLines - internally uses BufferedReader
+            System.out.println("DEBUG:\n" + texts);
             foundstringflag = false;
             for (int i = 0; i < texts.size(); i++) {
                 String str = texts.get(i);

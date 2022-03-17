@@ -12,13 +12,13 @@ public class Flight {
 
 	public void bookTicket(Ticket ticket) {
 		if (ticket.age > 5) {
-			if (cfTickets.size() < 100) {
+			if (cfTickets.size() < 4) {
 				requestClass.allocateClass(ticket);
 				cfTickets.add(ticket);
-			} else if (racTickets.size() < 50) {
+			} else if (racTickets.size() < 3) {
 				ticket.setTicketStatus("In Reservation against Cancellation.");
 				racTickets.add(ticket);
-			} else if (wlTickets.size() < 25) {
+			} else if (wlTickets.size() < 2) {
 				ticket.setTicketStatus("In Waiting List.");
 				wlTickets.add(ticket);
 			} else {
@@ -102,8 +102,8 @@ public class Flight {
 	}
 
 	public void availabelTickets() {
-		ss.println("Confirm available tickets are " + (100 - cfTickets.size()));
-		ss.println("Rac available tickets are " + (50 - racTickets.size()));
-		ss.println("Waiting list available tickets are " + (25 - wlTickets.size()));
+		ss.println("Confirm available tickets are " + (4 - cfTickets.size()));
+		ss.println("Rac available tickets are " + (3 - racTickets.size()));
+		ss.println("Waiting list available tickets are " + (2 - wlTickets.size()));
 	}
 }
