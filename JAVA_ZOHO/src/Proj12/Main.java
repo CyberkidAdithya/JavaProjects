@@ -1,9 +1,6 @@
 package Proj12;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Main {
     public static void main(String args[]) throws SQLException {
@@ -38,8 +35,15 @@ public class Main {
         } finally {
             stmt.close();
 //            conn.commit();
-            conn.close();
+//            conn.close();
         }
         System.out.println("Records created successfully");
+
+        String curr_query = "SELECT * FROM testschema.testtable";
+        PreparedStatement stmt2 = conn.prepareStatement(curr_query);
+        ResultSet rs = stmt2.executeQuery();
+        System.out.println(rs);
+
+        conn.close();
     }
 }
