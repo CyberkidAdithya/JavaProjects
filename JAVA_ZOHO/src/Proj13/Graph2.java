@@ -1,118 +1,127 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-class Graph {
-    int dist[];
-    Set<Integer> visited;
-    PriorityQueue<Node> q;
-    int V; // Number of vertices
-    List<List<Node> > adj_list;
+public class Node {
 
-    //class constructor
-    public Graph(int V) {
-        this.V = V;
-        dist = new int[V];
-        visited = new HashSet<Integer>();
-        // by default implement min Priority Queue
-        q = new PriorityQueue<Node>(V, new Node());
+    private String name;
+
+    private LinkedList<Node> shortestPath = new LinkedList<>();
+
+    private Integer distance = Integer.MAX_VALUE;
+
+    private Map<Node, Integer> adjacentNodes = new HashMap<>();
+
+    public Node(String name) {
+        this.name = name;
     }
 
-    // Dijkstra's Algorithm implementation
-    public void dijkstra(List<List<Node>> adj_list, int src) {
-        this.adj_list = adj_list;
+    public void addDestination(Node destination, int distance) {
+        adjacentNodes.put(destination, distance);
+    }
 
-        for (int i = 0; i < V; i++)
-            dist[i] = Integer.MAX_VALUE;
+    public String getName() {
+        return name;
+    }
 
-        // Distance to the source from itself is 0
-        dist[src] = 0;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        // first add source vertex to PriorityQueue
-        q.add(new Node(src, 0));
+    public Map<Node, Integer> getAdjacentNodes() {
+        return adjacentNodes;
+    }
 
-        while (visited.size() != V) {
+    public void setAdjacentNodes(Map<Node, Integer> adjacentNodes) {
+        this.adjacentNodes = adjacentNodes;
+    }
 
-            // u is removed from PriorityQueue and has min distance
-            int u = q.remove().node;
+    public Integer getDistance() {
+        return distance;
+    }
 
-            // add node to finalized list (visited)
-            visited.add(u);
-            process_neighbours(u);
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
+
+    public List<Node> getShortestPath() {
+        return shortestPath;
+    }
+
+    public void setShortestPath(LinkedList<Node> shortestPath) {
+        this.shortestPath = shortestPath;
+    }
+
+}
+
+public class Graph {
+
+    private Set<Node> nodes = new HashSet<>();
+
+    public void addNode(Node nodeA) {
+        nodes.add(nodeA);
+    }
+
+    public Set<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Set<Node> nodes) {
+        this.nodes = nodes;
+    }
+}
+
+public class Dijkstra {
+
+    public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+
+        source.setDistance(0);
+
+        Set<Node> settledNodes = new HashSet<>();
+        Set<Node> unsettledNodes = new HashSet<>();
+        unsettledNodes.add(source);
+
+        while (unsettledNodes.size() != 0) {
+            Node currentNode = getLowestDistanceNode(unsettledNodes);
+            unsettledNodes.remove(currentNode);
+            for (Entry<Node, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+                Node adjacentNode = adjacencyPair.getKey();
+                Integer edgeWeigh = adjacencyPair.getValue();
+
+                if (!settledNodes.contains(adjacentNode)) {
+                    CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
+                    unsettledNodes.add(adjacentNode);
+                }
+            }
+            settledNodes.add(currentNode);
+        }
+        return graph;
+    }
+
+    private static void CalculateMinimumDistance(Node evaluationNode, Integer edgeWeigh, Node sourceNode) {
+        Integer sourceDistance = sourceNode.getDistance();
+        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
+            evaluationNode.setDistance(sourceDistance + edgeWeigh);
+            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
+            shortestPath.add(sourceNode);
+            evaluationNode.setShortestPath(shortestPath);
         }
     }
 
-    // this methods processes all neighbours of the just visited node
-    private void process_neighbours(int u)   {
-        int edgeDistance = -1;
-        int newDistance = -1;
-
-        // process all neighbouring nodes of u
-        for (int i = 0; i < adj_list.get(u).size(); i++) {
-            Node v = adj_list.get(u).get(i);
-
-            //  proceed only if current node is not in 'visited'
-            if (!visited.contains(v.node)) {
-
-                // compare distances    - not [d(v) < d(u) + w(u,v)]
-                if (dist[u] + v.cost < dist[v.node])
-                    dist[v.node] = dist[u] + v.cost;
-
-                // Add the current vertex to the PriorityQueue
-                q.add(new Node(v.node, dist[v.node]));
+    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
+        Node lowestDistanceNode = null;
+        int lowestDistance = Integer.MAX_VALUE;
+        for (Node node : unsettledNodes) {
+            int nodeDistance = node.getDistance();
+            if (nodeDistance < lowestDistance) {
+                lowestDistance = nodeDistance;
+                lowestDistanceNode = node;
             }
         }
-    }
-}
-
-class Graph2 {
-    public static void main(String arg[])   {
-        int V = 6;
-        int source = 0;
-        // adjacency list representation of graph
-        List<List<Node> > adj_list = new ArrayList<List<Node> >();
-        // Initialize adjacency list for every node in the graph
-        for (int i = 0; i < V; i++) {
-            List<Node> item = new ArrayList<Node>();
-            adj_list.add(item);
-        }
-
-        // Input graph edges
-        adj_list.get(0).add(new Node(1, 5));
-        adj_list.get(0).add(new Node(2, 3));
-        adj_list.get(0).add(new Node(3, 2));
-        adj_list.get(0).add(new Node(4, 3));
-        adj_list.get(0).add(new Node(5, 3));
-        adj_list.get(2).add(new Node(1, 2));
-        adj_list.get(2).add(new Node(3, 3));
-
-        // call Dijkstra's algo method
-        Graph graph = new Graph(V);
-        graph.dijkstra(adj_list, source);
-
-        // Print the shortest path from source node to all the nodes
-        System.out.println("The shorted path from source node to other nodes:");
-        System.out.println("Source\t\t" + "Node#\t\t" + "Distance");
-        for (int i = 0; i < graph.dist.length; i++)
-            System.out.println(source + " \t\t\t " + i + " \t\t\t "  + graph.dist[i]);
-    }
-}
-
-// Node class
-class Node implements Comparator<Node> {
-    public int node;
-    public int cost;
-    public Node() { } //empty constructor
-
-    public Node(int node, int cost) {
-        this.node = node;
-        this.cost = cost;
-    }
-
-    @Override
-    public int compare(Node node1, Node node2) {
-        if (node1.cost < node2.cost)
-            return -1;
-        if (node1.cost > node2.cost)
-            return 1;
-        return 0;
+        return lowestDistanceNode;
     }
 }
